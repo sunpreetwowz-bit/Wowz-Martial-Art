@@ -1,0 +1,315 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --brand-ink: #111111;
+    --brand-crimson: #d01230;
+    --brand-crimson-dark: #a50e26;
+    --brand-paper: #f7f7f5;
+    --brand-stone: #5f5b57;
+    --brand-line: #e4e0d9;
+    --brand-white: #ffffff;
+    --brand-navy: #151821;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply antialiased font-sans;
+        color: var(--brand-ink);
+        background: var(--brand-white);
+    }
+
+    ::selection {
+        background: color-mix(in srgb, var(--brand-crimson) 30%, white);
+        color: var(--brand-ink);
+    }
+}
+
+@layer components {
+    .site-container {
+        @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .font-display {
+        font-family: 'Oswald', ui-sans-serif, system-ui, sans-serif;
+        letter-spacing: 0.03em;
+    }
+
+    .section-label {
+        @apply font-display text-xs font-semibold uppercase tracking-[0.28em] text-crimson;
+    }
+
+    .section-title {
+        @apply font-display text-4xl font-semibold uppercase leading-[0.95] text-ink sm:text-5xl;
+    }
+
+    .section-copy {
+        @apply mt-4 max-w-2xl text-base leading-relaxed text-stoneish sm:text-lg;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center bg-crimson px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 ease-out hover:bg-crimson-dark hover:-translate-y-0.5;
+    }
+
+    .btn-ghost {
+        @apply inline-flex items-center justify-center border border-white/70 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 ease-out hover:bg-white hover:text-ink hover:-translate-y-0.5;
+    }
+
+    .btn-ink {
+        @apply inline-flex items-center justify-center bg-ink px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-300 ease-out hover:bg-crimson hover:-translate-y-0.5;
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center border border-ink/20 bg-white px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-ink transition duration-300 ease-out hover:border-crimson hover:text-crimson hover:-translate-y-0.5;
+    }
+
+    .media-frame {
+        @apply relative overflow-hidden bg-ink;
+    }
+
+    .media-frame img {
+        @apply h-full w-full object-cover transition duration-700 ease-out;
+    }
+
+    .media-frame:hover img {
+        transform: scale(1.05);
+    }
+
+    .program-card {
+        @apply relative block overflow-hidden bg-ink transition duration-500 ease-out;
+    }
+
+    .program-card img {
+        @apply h-full w-full object-cover transition duration-700 ease-out;
+    }
+
+    .program-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .program-card:hover img {
+        transform: scale(1.06);
+    }
+
+    .program-card-overlay {
+        @apply absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/10 transition duration-500;
+    }
+
+    .program-card:hover .program-card-overlay {
+        background: linear-gradient(to top, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.4), rgba(17, 17, 17, 0.08));
+    }
+
+    .page-hero {
+        @apply relative overflow-hidden bg-ink pt-16 pb-16 text-white sm:pb-20;
+    }
+
+    .page-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(115deg, rgba(17, 17, 17, 0.96) 0%, rgba(17, 17, 17, 0.78) 55%, rgba(208, 18, 48, 0.35) 100%),
+            url('/storage/gallery/evening-pads.jpg') center/cover no-repeat;
+        animation: hero-pan 22s ease-in-out alternate infinite;
+    }
+
+    .page-hero > * {
+        @apply relative z-10;
+    }
+
+    .site-header {
+        @apply sticky top-0 z-50 border-b border-line/80 bg-white/95 shadow-sm backdrop-blur transition duration-300;
+    }
+
+    .site-header.is-scrolled {
+        @apply shadow-md;
+        border-color: rgba(228, 224, 217, 0.95);
+    }
+
+    .nav-link {
+        @apply relative text-sm font-semibold uppercase tracking-[0.08em] text-ink/70 transition hover:text-crimson;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: var(--brand-crimson);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.is-active::after {
+        transform: scaleX(1);
+    }
+
+    .nav-link.is-active {
+        @apply text-crimson;
+    }
+
+    .topbar {
+        @apply border-b border-white/10 bg-ink text-white;
+    }
+
+    .branch-map {
+        @apply relative min-h-[260px] bg-ink sm:min-h-[320px] lg:min-h-full;
+    }
+
+    .branch-map iframe {
+        @apply absolute inset-0 h-full w-full border-0 grayscale-[20%] contrast-[1.05];
+    }
+
+    /* Admin console */
+    .admin-shell {
+        background:
+            radial-gradient(circle at top right, rgba(208, 18, 48, 0.06), transparent 32%),
+            var(--brand-paper);
+    }
+
+    .admin-sidebar {
+        background:
+            linear-gradient(180deg, #1a1d27 0%, var(--brand-navy) 55%, #0f1016 100%);
+    }
+
+    .admin-nav-link {
+        @apply flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium text-white/65 transition;
+    }
+
+    .admin-nav-link:hover {
+        @apply bg-white/5 text-white;
+    }
+
+    .admin-nav-link.is-active {
+        @apply bg-crimson text-white;
+    }
+
+    .admin-panel {
+        @apply border border-line bg-white;
+    }
+
+    .admin-btn {
+        @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition;
+    }
+
+    .admin-btn-primary {
+        @apply admin-btn bg-crimson text-white hover:bg-crimson-dark;
+    }
+
+    .admin-btn-ink {
+        @apply admin-btn bg-ink text-white hover:bg-crimson;
+    }
+
+    .admin-btn-secondary {
+        @apply admin-btn border border-line bg-white text-ink hover:border-crimson hover:text-crimson;
+    }
+}
+
+@layer utilities {
+    .reveal,
+    .reveal-delay,
+    .reveal-delay-2,
+    .js-reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+            opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+        will-change: opacity, transform;
+    }
+
+    .reveal {
+        --reveal-delay: 0ms;
+    }
+
+    .reveal-delay {
+        --reveal-delay: 120ms;
+    }
+
+    .reveal-delay-2 {
+        --reveal-delay: 220ms;
+    }
+
+    .reveal.is-inview,
+    .reveal-delay.is-inview,
+    .reveal-delay-2.is-inview,
+    .js-reveal.is-inview {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .kenburns {
+        animation: kenburns 18s ease-out both;
+    }
+}
+
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes kenburns {
+    from {
+        transform: scale(1.08);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes hero-pan {
+    from {
+        transform: scale(1.06) translate3d(0, 0, 0);
+    }
+    to {
+        transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal,
+    .reveal-delay,
+    .reveal-delay-2,
+    .js-reveal,
+    .motion-reduce .reveal,
+    .motion-reduce .reveal-delay,
+    .motion-reduce .reveal-delay-2,
+    .motion-reduce .js-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .kenburns,
+    .page-hero::before {
+        animation: none !important;
+    }
+
+    .btn-primary:hover,
+    .btn-ghost:hover,
+    .btn-ink:hover,
+    .btn-outline:hover,
+    .program-card:hover {
+        transform: none;
+    }
+}
